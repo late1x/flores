@@ -1,26 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <title>Flores amarillas</title>
-  <style>
-    body {
-      background-color: #f0f0f0;
-    }
-    img {
-      width: 50%;
-      margin: 0 auto;
-    }
-    .mensaje {
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flores Amarillas</title>
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0;
+        }
+        .flower {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            border-radius: 50%;
+            animation-name: bloom;
+            animation-duration: 4s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+        @keyframes bloom {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+        #message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            text-align: center;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Daisy_field.jpg/1200px-Daisy_field.jpg" alt="Flores amarillas">
-  <div class="mensaje">
-    <h1>Para ti, con todo mi corazón</h1>
-    <p>Te mando estas flores amarillas para decirte que te quiero mucho.</p>
-    <p>Eres lo más importante para mí.</p>
-  </div>
+    <div id="message">
+        ¡Mensaje final!
+    </div>
+    <script>
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.style.left = `${Math.random() * 90 + 5}vw`;
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                document.body.removeChild(flower);
+                if (document.querySelectorAll('.flower').length === 0) {
+                    document.getElementById('message').style.display = 'block';
+                }
+            }, 4000);
+        }
+
+        setInterval(createFlower, 1000);
+    </script>
 </body>
 </html>
